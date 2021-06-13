@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def getall(request):
-    pictures = Picture.objects.filter(user=request.user).all()
+    pictures = Picture.objects.filter(user=request.user).order_by("uploaded_at")[::-1]
     picture_serializer = PictureSerializer(pictures,many=True)
     return Response(picture_serializer.data,status=200)
 
@@ -22,10 +22,12 @@ def upload(request):
         picture.save()
         return Response({"status":"success"},status=201)
     except Exception as e:
+        print(e)
         return Response({"status":"fail","message":str(e)},status=500)
 
 
 @api_view(["DELETE"])
+@permission_classes((IsAuthenticated,))
 def delete(request,id):
     try:
         picture = Picture.objects.filter(id=id).first()
