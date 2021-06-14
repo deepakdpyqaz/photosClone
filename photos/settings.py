@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-bz2)8)0a1na3$2e9q1*89%isf!(fr*z3*k-q$$p@0ueoc^i0!0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost","127.0.0.1","photosclonebymonika.herokuapp.com"
+]
 
 
 # Application definition
@@ -140,10 +142,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080"
-]
-
+CORS_ALLOW_ALL_ORIGINS = True
 # MEDIA FILES
 
 MEDIA_URL = "/media/"
